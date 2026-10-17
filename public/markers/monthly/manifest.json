@@ -1,0 +1,91 @@
+{
+  "region": "长江中下游常见稻麦轮作，按代表性阶段概念化呈现",
+  "rendering": "单株单茎；抽穗后单穗、不分枝；水稻穗采用图标化简化结构，并非植物学解剖图",
+  "webpSize": 256,
+  "months": [
+    {
+      "month": 1,
+      "crop": "小麦",
+      "stage": "越冬分蘖",
+      "png": "png/01-wheat-overwintering.png",
+      "webp": "webp/01-wheat-overwintering.webp"
+    },
+    {
+      "month": 2,
+      "crop": "小麦",
+      "stage": "返青",
+      "png": "png/02-wheat-regreening.png",
+      "webp": "webp/02-wheat-regreening.webp"
+    },
+    {
+      "month": 3,
+      "crop": "小麦",
+      "stage": "拔节",
+      "png": "png/03-wheat-jointing.png",
+      "webp": "webp/03-wheat-jointing.webp"
+    },
+    {
+      "month": 4,
+      "crop": "小麦",
+      "stage": "抽穗开花",
+      "png": "png/04-wheat-heading.png",
+      "webp": "webp/04-wheat-heading.webp"
+    },
+    {
+      "month": 5,
+      "crop": "小麦",
+      "stage": "灌浆转熟",
+      "png": "png/05-wheat-ripening.png",
+      "webp": "webp/05-wheat-ripening.webp"
+    },
+    {
+      "month": 6,
+      "crop": "水稻",
+      "stage": "移栽返青",
+      "png": "png/06-rice-transplanting.png",
+      "webp": "webp/06-rice-transplanting.webp"
+    },
+    {
+      "month": 7,
+      "crop": "水稻",
+      "stage": "分蘖",
+      "png": "png/07-rice-tillering.png",
+      "webp": "webp/07-rice-tillering.webp"
+    },
+    {
+      "month": 8,
+      "crop": "水稻",
+      "stage": "拔节孕穗",
+      "png": "png/08-rice-booting.png",
+      "webp": "webp/08-rice-booting.webp"
+    },
+    {
+      "month": 9,
+      "crop": "水稻",
+      "stage": "抽穗初期",
+      "png": "png/09-rice-heading.png",
+      "webp": "webp/09-rice-heading.webp"
+    },
+    {
+      "month": 10,
+      "crop": "水稻",
+      "stage": "金穗成熟",
+      "png": "png/10-rice-ripening.png",
+      "webp": "webp/10-rice-ripening.webp"
+    },
+    {
+      "month": 11,
+      "crop": "小麦",
+      "stage": "秋播出苗",
+      "png": "png/11-wheat-emergence.png",
+      "webp": "webp/11-wheat-emergence.webp"
+    },
+    {
+      "month": 12,
+      "crop": "小麦",
+      "stage": "冬前生长",
+      "png": "png/12-wheat-early-tillering.png",
+      "webp": "webp/12-wheat-early-tillering.webp"
+    }
+  ]
+}

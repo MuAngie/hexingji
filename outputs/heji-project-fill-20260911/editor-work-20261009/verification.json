@@ -1,0 +1,28 @@
+{
+  "issues": [],
+  "changed_existing_cells": [
+    "地图项目样例!A1",
+    "地图项目样例!A2",
+    "地图项目样例!G5",
+    "地图项目样例!K5",
+    "地图项目样例!L5",
+    "地图项目样例!I7",
+    "地图项目样例!K7",
+    "地图项目样例!L7",
+    "地图项目样例!I10",
+    "地图项目样例!K10",
+    "地图项目样例!L10",
+    "地图项目样例!K11",
+    "地图项目样例!L11"
+  ],
+  "original_style_changes": [],
+  "tables_before": [
+    [
+      "MapProjects",
+      "A4:L14"
+    ]
+  ],
+  "table_after": "A4:L20",
+  "project_count": 16,
+  "pending_count": 13
+}

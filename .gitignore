@@ -1,0 +1,28 @@
+# Archived content
+archive/
+
+# Dependencies and build output
+node_modules/
+.pnpm-store/
+.next/
+out/
+dist/
+coverage/
+*.tsbuildinfo
+next-env.d.ts
+
+# Local tools and temporary files
+.agents/
+.codex/
+.codex-artifacts/
+tmp/
+.marker-*.jpg
+*.log
+.DS_Store
+Thumbs.db
+
+# Local credentials
+.env*
+!.env.example
+*.pem
+*.key

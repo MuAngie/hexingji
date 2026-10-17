@@ -1,0 +1,17 @@
+{
+  "tool": "Built-in image_gen",
+  "export": "仅用 Sharp 等比调整尺寸并注册透明画布，未用代码重绘植物；保留原图结构、纹理和颜色。",
+  "reusedArtworkPrompts": "reused-artwork-prompts.json",
+  "newArtwork": [
+    {
+      "month": 12,
+      "source": "originals/12-wheat-sowing.png",
+      "prompt": "Use case: stylized-concept.\nAsset type: December wheat sowing stage for the Heji crop growth-record icon set; one transparent raster source illustration.\nInput image 1: STYLE REFERENCE ONLY, the mature wheat plant this seed will later grow into. Match its warm hand-painted gouache brush texture, natural harvest-gold colors and fine warm ivory silhouette contour.\nSubject: EXACTLY ONE wheat seed, an upright slim rounded oval wheat kernel with a clearly visible subtle longitudinal crease, slightly tapered top and rounded basal germ end. Warm ochre-gold with a restrained pale-gold highlight and deeper amber crease, soft brush strokes, simple natural grain shape. This is the newly sown seed before emergence: NO leaves, NO green shoot, NO roots.\nComposition: front three-quarter view, vertical long axis, entire seed centered and visible on a square transparent canvas, no other object. This is a clean high-resolution source cutout; it will be exported at a deliberately SMALL scale in the final fixed growth-record canvas, so do not draw a scene around it.\nConstraints: genuine transparent alpha, thin ivory contour on the kernel itself, no circle, no disk, no badge, no pot, no soil patch, no ground, no cast shadow, no label, no month number, no typography, no frame, no watermark. Not a mature wheat ear, not corn, not multiple seeds. ONE asset only."
+    },
+    {
+      "month": 11,
+      "source": "originals/11-rice-stubble.png",
+      "prompt": "Use case: precise-object-edit.\nAsset type: November post-harvest rice stage in the Heji crop growth-record icon set.\nInput image 1: the October mature rice plant to evolve into the SAME individual plant after harvest. Keep its hand-painted gouache texture, natural green-gold palette and thin warm ivory silhouette contour.\nPrimary request: turn this ripe rice plant into ONE short rice stubble after harvesting. Remove ALL the grain strand and the entire upper stem and upper foliage. Retain only ONE short slim basal culm with a neat flat cut top and one subtle lower node; two SHORT wilted narrow leaf remnants attach directly to this basal stem, one curving softly left, one softly right. Mostly straw-gold with faint muted green at the base. A simple clean harvested stump, no standing grain, no new seedlings.\nIdentity: same single basal point and single unbranched stem as October, cut much shorter, clearly shows the end of this rice plant's growth cycle. NO extra tillers, NO Y-fork stems, no branches. Leaves are leaf remnants, not extra stems.\nComposition: whole isolated stump visible on a square transparent canvas, base centered; clean high-resolution source artwork that will be exported smaller on the fixed growth canvas.\nConstraints: genuine transparent alpha including gaps, no soil mound, no field, no pot, no roots, no tools, no cut loose grain, no fallen debris, no circle, no badge, no shadow, no text, no month number, no frame, no watermark. ONE stump only."
+    }
+  ]
+}

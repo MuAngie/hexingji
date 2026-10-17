@@ -1,0 +1,147 @@
+{
+  "version": 2,
+  "calendar": "按用户指定的小麦 12 月播种安排的稻麦成长视觉方案，不代表全国统一农时",
+  "rendering": "同一画布、同一根部基线；单茎单穗不分叉；9 月青绿直立，10 月金黄下垂",
+  "pngSize": 1254,
+  "webpSize": 256,
+  "anchor": {
+    "x": 0.5,
+    "y": 0.93
+  },
+  "previewOrder": [
+    12,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+  ],
+  "months": [
+    {
+      "month": 1,
+      "crop": "小麦",
+      "stage": "出苗",
+      "slug": "01-wheat-emergence",
+      "heightRatio": 0.22,
+      "source": "../monthly/png/11-wheat-emergence.png",
+      "png": "png/01-wheat-emergence.png",
+      "webp": "webp/01-wheat-emergence.webp"
+    },
+    {
+      "month": 2,
+      "crop": "小麦",
+      "stage": "幼苗生长",
+      "slug": "02-wheat-leaf-growth",
+      "heightRatio": 0.38,
+      "source": "../monthly/png/12-wheat-early-tillering.png",
+      "png": "png/02-wheat-leaf-growth.png",
+      "webp": "webp/02-wheat-leaf-growth.webp"
+    },
+    {
+      "month": 3,
+      "crop": "小麦",
+      "stage": "拔节",
+      "slug": "03-wheat-jointing",
+      "heightRatio": 0.62,
+      "source": "../monthly/png/03-wheat-jointing.png",
+      "png": "png/03-wheat-jointing.png",
+      "webp": "webp/03-wheat-jointing.webp"
+    },
+    {
+      "month": 4,
+      "crop": "小麦",
+      "stage": "抽穗开花",
+      "slug": "04-wheat-heading",
+      "heightRatio": 0.8,
+      "source": "../monthly/png/04-wheat-heading.png",
+      "png": "png/04-wheat-heading.png",
+      "webp": "webp/04-wheat-heading.webp"
+    },
+    {
+      "month": 5,
+      "crop": "小麦",
+      "stage": "灌浆转熟",
+      "slug": "05-wheat-ripening",
+      "heightRatio": 0.9,
+      "source": "../monthly/png/05-wheat-ripening.png",
+      "png": "png/05-wheat-ripening.png",
+      "webp": "webp/05-wheat-ripening.webp"
+    },
+    {
+      "month": 6,
+      "crop": "水稻",
+      "stage": "移栽返青",
+      "slug": "06-rice-transplanting",
+      "heightRatio": 0.24,
+      "source": "../monthly/png/06-rice-transplanting.png",
+      "png": "png/06-rice-transplanting.png",
+      "webp": "webp/06-rice-transplanting.webp"
+    },
+    {
+      "month": 7,
+      "crop": "水稻",
+      "stage": "叶片生长",
+      "slug": "07-rice-leaf-growth",
+      "heightRatio": 0.48,
+      "source": "../monthly/png/07-rice-tillering.png",
+      "png": "png/07-rice-leaf-growth.png",
+      "webp": "webp/07-rice-leaf-growth.webp"
+    },
+    {
+      "month": 8,
+      "crop": "水稻",
+      "stage": "拔节孕穗",
+      "slug": "08-rice-booting",
+      "heightRatio": 0.72,
+      "source": "../monthly/png/08-rice-booting.png",
+      "png": "png/08-rice-booting.png",
+      "webp": "webp/08-rice-booting.webp"
+    },
+    {
+      "month": 9,
+      "crop": "水稻",
+      "stage": "抽穗初期",
+      "slug": "09-rice-heading",
+      "heightRatio": 0.88,
+      "source": "../monthly/png/09-rice-heading.png",
+      "png": "png/09-rice-heading.png",
+      "webp": "webp/09-rice-heading.webp"
+    },
+    {
+      "month": 10,
+      "crop": "水稻",
+      "stage": "金穗成熟",
+      "slug": "10-rice-ripening",
+      "heightRatio": 0.9,
+      "source": "../monthly/png/10-rice-ripening.png",
+      "png": "png/10-rice-ripening.png",
+      "webp": "webp/10-rice-ripening.webp"
+    },
+    {
+      "month": 11,
+      "crop": "水稻",
+      "stage": "收割留茬",
+      "slug": "11-rice-stubble",
+      "heightRatio": 0.2,
+      "source": "originals/11-rice-stubble.png",
+      "png": "png/11-rice-stubble.png",
+      "webp": "webp/11-rice-stubble.webp"
+    },
+    {
+      "month": 12,
+      "crop": "小麦",
+      "stage": "播种",
+      "slug": "12-wheat-sowing",
+      "heightRatio": 0.1,
+      "source": "originals/12-wheat-sowing.png",
+      "png": "png/12-wheat-sowing.png",
+      "webp": "webp/12-wheat-sowing.webp"
+    }
+  ]
+}
