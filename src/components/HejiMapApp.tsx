@@ -7,7 +7,6 @@ import {
   Minus,
   Plus,
   RotateCcw,
-  RotateCw,
   Search
 } from "lucide-react";
 import {
@@ -236,10 +235,8 @@ function FilterBar({
 }
 
 function MapControls({
-  rotation,
   setRotation
 }: {
-  rotation: number;
   setRotation: (rotation: number) => void;
 }) {
   const { zoomIn, zoomOut, resetTransform } = useControls();
@@ -269,20 +266,6 @@ function MapControls({
         }}
       >
         <RotateCcw size={19} />
-      </button>
-      <button
-        className="control-button"
-        aria-label="向左旋转"
-        onClick={() => setRotation(rotation - 12)}
-      >
-        <RotateCcw size={19} />
-      </button>
-      <button
-        className="control-button"
-        aria-label="向右旋转"
-        onClick={() => setRotation(rotation + 12)}
-      >
-        <RotateCw size={19} />
       </button>
     </div>
   );
@@ -396,7 +379,7 @@ export function HejiMapApp() {
             </motion.div>
           </TransformComponent>
         </div>
-        <MapControls rotation={rotation} setRotation={setRotation} />
+        <MapControls setRotation={setRotation} />
       </TransformWrapper>
 
       <BrandBlock />
