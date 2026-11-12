@@ -1058,6 +1058,84 @@ button {
   overflow-wrap: anywhere;
 }
 
+.minqin-notice-details {
+  margin-top: 8px;
+}
+
+.minqin-notice-details > details {
+  border-top: 1px solid var(--motuo-line);
+}
+
+.minqin-notice-details summary {
+  min-height: 40px;
+  padding: 8px 0;
+  color: var(--motuo-green);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.minqin-notice-details details[open] > summary svg {
+  rotate: 90deg;
+}
+
+.minqin-notice-details ul {
+  margin: 0 0 10px;
+  padding-left: 16px;
+  list-style: disc;
+}
+
+.minqin-notice-details li {
+  margin: 0 0 6px;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  background: transparent;
+  font-size: 12px;
+  line-height: 1.75;
+}
+
+.minqin-notice-details p {
+  margin: 0 0 8px;
+  color: var(--motuo-muted);
+  font-size: 12px;
+  line-height: 1.75;
+}
+
+.minqin-notice-details a {
+  color: var(--motuo-green);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.minqin-notice-sources h4 {
+  margin: 16px 0 4px;
+  font-size: 14px;
+}
+
+.minqin-notice-posters {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin: 12px 0 20px;
+}
+
+.minqin-notice-posters a {
+  min-width: 0;
+  color: var(--motuo-green);
+  font-size: 11px;
+}
+
+.minqin-notice-posters img {
+  display: block;
+  width: 100%;
+  height: 140px;
+  margin-bottom: 6px;
+  border: 1px solid var(--motuo-line);
+  border-radius: 8px;
+  object-fit: contain;
+  background: var(--motuo-paper);
+}
+
 .motuo-preview :is(button, summary):focus-visible,
 .motuo-sheet :is(button, a, summary):focus-visible {
   outline: 2px solid var(--motuo-green);

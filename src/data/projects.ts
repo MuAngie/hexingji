@@ -1,4 +1,5 @@
 import content from "./heji-content.json";
+import { minqinAutumnNotice } from "./minqin-autumn-2026";
 import { getParticipationFilters, getParticipationGroups, getProjectCategories, maintenanceProjectIds, type ParticipationOption } from "./participation";
 import type { GeoCoordinates } from "./mapProjection";
 
@@ -91,6 +92,7 @@ export const locations: HejiLocation[] = content.projects.map((project) => {
 
 export function getProjectView(legacyId: string, data: ProjectContent = content) {
   const project = data.projects.find((item) => item.id === maintenanceProjectIds[legacyId])!;
+  const regionText = project.id === minqinAutumnNotice.projectId ? minqinAutumnNotice.region : project.region;
   const people = data.projectPeople.filter((item) => item.projectId === project.id && item.recordStatus !== "已归档");
   const groups = getParticipationGroups(legacyId, data.participationOptions);
   const options = groups.flatMap((group) => group.options);
@@ -101,7 +103,7 @@ export function getProjectView(legacyId: string, data: ProjectContent = content)
   const sourceLinks = Array.from(new Set(project.sourceNotes?.match(/https?:\/\/[^\s]+/g) ?? []))
     .map((url) => ({ url, label: new URL(url).hostname }));
   return {
-    project, people, groups, options, sourceLinks, categories, programText,
+    project, people, groups, options, sourceLinks, categories, programText, regionText,
     quoteLines: project.quote?.split(/\r?\n/).filter((line) => line.trim()) ?? [],
     quoteEmphasisIndex: project.id === "HJ-008" ? 3 : project.id === "HJ-010" ? 1 : 0,
     counts: { objects: people.length, participationRecords: options.length }

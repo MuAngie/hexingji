@@ -6,6 +6,8 @@ import { useEffect, useRef, useState } from "react";
 import { getProjectView, type HejiLocation } from "@/data/projects";
 import { ParticipationGroups } from "./ProjectParticipation";
 import { ChibiAvatar } from "./ChibiAvatar";
+import { minqinAutumnNotice } from "@/data/minqin-autumn-2026";
+import { MinqinAutumnSources } from "./MinqinAutumnNotice";
 
 async function requestVisitCount(url: string, method: "GET" | "POST", signal?: AbortSignal) {
   const response = await fetch(url, { method, cache: "no-store", signal });
@@ -20,7 +22,7 @@ export function ProjectStoryCard({ location, onShowDetails, onClose }: {
   onShowDetails: () => void;
   onClose: () => void;
 }) {
-  const { project, groups, categories, programText } = getProjectView(location.id);
+  const { project, groups, categories, programText, regionText } = getProjectView(location.id);
   const [visitCount, setVisitCount] = useState<number | null>(null);
   const [visitError, setVisitError] = useState<string | null>(null);
   const visitUrl = `/api/visits/${project.id}`;
@@ -65,7 +67,7 @@ export function ProjectStoryCard({ location, onShowDetails, onClose }: {
         <button className="project-detail-close" onClick={onClose} aria-label="关闭项目概览"><X size={18} /></button>
       </div>
       <div className="story-card-scroll">
-        {project.region ? <p className="motuo-place"><MapPin size={14} /><span className="motuo-region">{project.region}</span></p> : null}
+        {regionText ? <p className="motuo-place"><MapPin size={14} /><span className="motuo-region">{regionText}</span></p> : null}
         <section className="motuo-preview-section">
           <h3>项目概况</h3>
           {programText ? <p className="motuo-muted">{programText}</p> : null}
@@ -90,7 +92,7 @@ export function ProjectStoryCard({ location, onShowDetails, onClose }: {
 }
 
 export function ProjectDetail({ location, onClose }: { location: HejiLocation; onClose: () => void }) {
-  const { project, people, groups, counts, sourceLinks, quoteLines, quoteEmphasisIndex, categories, programText } = getProjectView(location.id);
+  const { project, people, groups, counts, sourceLinks, quoteLines, quoteEmphasisIndex, categories, programText, regionText } = getProjectView(location.id);
   const dialogRef = useRef<HTMLElement>(null);
   const jumpingRef = useRef(false);
   const sections = [
@@ -148,7 +150,7 @@ export function ProjectDetail({ location, onClose }: { location: HejiLocation; o
         <header className="motuo-heading">
           <div className="motuo-heading-top"><span className="motuo-eyebrow">项目档案 / {project.id}</span><button className="project-detail-close" onClick={onClose} aria-label="关闭完整资料"><X size={20} /></button></div>
           <h2 id="motuo-title" className="whitespace-pre-line">{project.name.replace("｜", "｜\n")}</h2>
-          {project.region ? <p className="motuo-place"><MapPin size={15} /><span className="motuo-region">{project.region}</span></p> : null}
+          {regionText ? <p className="motuo-place"><MapPin size={15} /><span className="motuo-region">{regionText}</span></p> : null}
           <div className="mt-2 flex flex-wrap gap-1.5">{categories.map((category) => <span className="motuo-tag" key={category}>{category}</span>)}</div>
         </header>
         <nav className="motuo-nav" aria-label="项目内容导航">
@@ -205,6 +207,7 @@ export function ProjectDetail({ location, onClose }: { location: HejiLocation; o
           {project.sourceNotes || sourceLinks.length ? <footer>
             <details className="motuo-original-source">
               <summary>资料来源</summary>
+              {project.id === minqinAutumnNotice.projectId ? <MinqinAutumnSources /> : null}
               <div className="motuo-source-links">{sourceLinks.map((source) => <a key={source.url} href={source.url} target="_blank" rel="noreferrer">{source.label}<ArrowUpRight size={14} /></a>)}</div>
               <p>{project.sourceNotes}</p>
             </details>

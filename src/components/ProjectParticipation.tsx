@@ -3,6 +3,8 @@
 import { ArrowUpRight, Check, ChevronRight, Copy } from "lucide-react";
 import { useState } from "react";
 import { type ParticipationGroup, type ParticipationOption } from "@/data/participation";
+import { minqinAutumnNotice } from "@/data/minqin-autumn-2026";
+import { MinqinAutumnDetails } from "./MinqinAutumnNotice";
 
 export function ParticipationGroups({ groups, detailed = false }: {
   groups: ParticipationGroup[];
@@ -26,6 +28,9 @@ export function ParticipationGroups({ groups, detailed = false }: {
 
 function ParticipationCard({ option }: { option: ParticipationOption }) {
   const [copyState, setCopyState] = useState<"idle" | "copied" | "failed">("idle");
+  const isMinqinAutumn = option.id === minqinAutumnNotice.participationId && option.projectId === minqinAutumnNotice.projectId;
+  const searchTerm = isMinqinAutumn ? minqinAutumnNotice.miniProgram : option.name;
+  const copyLabel = isMinqinAutumn ? "复制小程序名" : "复制搜索词";
   const canLink = option.url && !["已结束", "暂时关闭"].includes(option.availabilityStatus ?? "");
   const canSearch = !option.url && (
     ["购买助农", "线上购买"].includes(option.category) || option.platform === "微信小程序"
@@ -44,17 +49,18 @@ function ParticipationCard({ option }: { option: ParticipationOption }) {
       ) : canSearch ? (
         <button className="motuo-text-action" onClick={async () => {
           try {
-            await navigator.clipboard.writeText(option.name);
+            await navigator.clipboard.writeText(searchTerm);
             setCopyState("copied");
           } catch {
             setCopyState("failed");
           }
         }}>
           {copyState === "copied" ? <Check size={14} /> : <Copy size={14} />}
-          {copyState === "copied" ? "已复制搜索词" : "复制搜索词"}
+          {copyState === "copied" ? (isMinqinAutumn ? "已复制小程序名" : "已复制搜索词") : copyLabel}
         </button>
       ) : null}
-      {copyState !== "idle" ? <p className="motuo-copy-status" role="status">{copyState === "copied" ? `已复制“${option.name}”` : `复制未成功，可手动搜索“${option.name}”`}</p> : null}
+      {copyState !== "idle" ? <p className="motuo-copy-status" role="status">{copyState === "copied" ? `已复制“${searchTerm}”` : `复制未成功，可手动搜索“${searchTerm}”`}</p> : null}
+      {isMinqinAutumn ? <MinqinAutumnDetails /> : null}
     </article>
   );
 }

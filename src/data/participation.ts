@@ -1,4 +1,5 @@
 import content from "./heji-content.json";
+import { minqinAutumnNotice } from "./minqin-autumn-2026";
 
 const options = content.participationOptions;
 
@@ -29,7 +30,11 @@ export const maintenanceProjectIds: Record<string, string> = {
 export function getParticipationGroups(legacyId: string, records: ParticipationOption[] = options) {
   const projectOptions = records.filter((option) =>
     option.projectId === maintenanceProjectIds[legacyId] && option.recordStatus !== "已归档"
-  );
+  ).map((option) => option.id === minqinAutumnNotice.participationId && option.projectId === minqinAutumnNotice.projectId
+    ? { ...option, name: minqinAutumnNotice.title,
+      productsText: `${minqinAutumnNotice.period}\n${minqinAutumnNotice.site}`,
+      instructions: minqinAutumnNotice.instructions }
+    : option);
   return Array.from(new Set(projectOptions.map((option) => option.category))).map((category) => ({
     category,
     options: projectOptions.filter((option) => option.category === category)
