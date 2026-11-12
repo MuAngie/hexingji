@@ -123,12 +123,29 @@ button {
   transform: translateY(-1px);
 }
 
+.map-filter-bar {
+  position: fixed;
+  inset: auto 0 0;
+  z-index: 30;
+  display: grid;
+  grid-template-columns: repeat(var(--filter-count), minmax(0, 1fr));
+  gap: 8px;
+  border-width: 1px 0 0;
+  border-radius: 0;
+  padding: 12px 20px calc(12px + env(safe-area-inset-bottom));
+}
+
+.map-controls {
+  bottom: calc(var(--filter-bar-height, 65px) + 12px);
+}
+
 .filter-chip {
   height: 40px;
-  flex: 0 0 auto;
+  min-width: 0;
   border: 0;
   border-radius: 999px;
-  padding: 0 17px;
+  padding: 0 8px;
+  white-space: nowrap;
   color: #6f5433;
   background: transparent;
   font-size: 14px;
@@ -149,7 +166,7 @@ button {
 
 .location-anchor {
   position: absolute;
-  transform: scale(var(--marker-inverse-scale, 1));
+  transform: scale(calc(var(--marker-inverse-scale, 1) * var(--marker-zoom-scale, 1)));
   transform-origin: 0 0;
   will-change: transform;
   z-index: 4;
@@ -197,8 +214,9 @@ button {
 }
 
 [data-marker-density="compact"] .location-marker {
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: max(44px, calc(var(--marker-visible-height, 32px) + 8px));
+  justify-content: center;
   gap: 0;
   padding: 4px;
 }
@@ -218,7 +236,7 @@ button {
 [data-marker-density="compact"] .marker-label {
   position: absolute;
   top: 50%;
-  left: 44px;
+  left: calc(50% + var(--marker-visible-height, 32px) / 2 + 8px);
   width: max-content;
   max-width: 210px;
   overflow: hidden;
@@ -246,9 +264,14 @@ button {
 }
 
 .marker-pin {
+  position: absolute;
+  left: 50%;
+  top: calc(50% + var(--marker-root-offset, 0px));
+  translate: -50% calc(0% - var(--marker-image-anchor, 93%));
   display: grid;
-  width: 32px;
-  height: 32px;
+  width: var(--marker-size, 64px);
+  height: var(--marker-size, 64px);
+  pointer-events: none;
   place-items: center;
   color: inherit;
   filter:
@@ -261,8 +284,8 @@ button {
 
 .marker-pin img {
   display: block;
-  width: 32px;
-  height: 32px;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
   pointer-events: none;
   transform-origin: 50% 93%;
@@ -300,12 +323,12 @@ button {
 .story-card-overlay {
   --glass-background: rgba(250, 252, 247, 0.64);
   position: fixed;
-  top: 50%;
+  top: calc((100dvh - var(--filter-bar-height, 65px)) / 2);
   right: 88px;
   z-index: 35;
   display: flex;
   width: min(430px, calc(100vw - 32px));
-  max-height: min(680px, calc(100vh - 220px));
+  max-height: min(680px, calc(100dvh - var(--filter-bar-height, 65px) - 160px));
   flex-direction: column;
   overflow: hidden;
   border-radius: 24px;
@@ -511,6 +534,596 @@ button {
   font-weight: 800;
 }
 
+/* Project content from the split maintenance workbook. */
+.motuo-preview,
+.motuo-sheet,
+.participation-groups {
+  --motuo-paper: oklch(97.6% 0.013 90);
+  --motuo-ink: oklch(32% 0.035 65);
+  --motuo-muted: oklch(48% 0.025 70);
+  --motuo-green: oklch(43% 0.075 140);
+  --motuo-line: oklch(87% 0.02 90);
+  color: var(--motuo-ink);
+}
+
+.motuo-heading-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.motuo-eyebrow {
+  color: var(--motuo-green);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+.motuo-preview h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 650;
+  line-height: 1.5;
+}
+
+.motuo-place {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 6px;
+  color: var(--motuo-muted);
+  font-size: 12px;
+}
+
+.motuo-place svg {
+  flex: none;
+  margin-top: 2px;
+}
+
+.motuo-region {
+  flex: 1;
+  min-width: 0;
+  white-space: pre-line;
+  overflow-wrap: anywhere;
+}
+
+.motuo-preview-section {
+  margin-top: 22px;
+  padding-top: 16px;
+  border-top: 1px solid var(--motuo-line);
+}
+
+.motuo-preview h3,
+.motuo-preview-section p {
+  margin: 0 0 8px;
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.motuo-preview-section p {
+  white-space: pre-line;
+  overflow-wrap: anywhere;
+}
+
+.motuo-preview h3 {
+  color: var(--motuo-green);
+  font-size: 15px;
+  font-weight: 650;
+}
+
+.motuo-preview-section .motuo-muted {
+  font-size: 12px;
+}
+
+.motuo-preview-group > summary > h4 {
+  margin: 0;
+  color: var(--motuo-green);
+  font-size: 13px;
+  font-weight: 650;
+}
+
+.motuo-preview-group {
+  border-bottom: 1px solid rgba(138, 112, 75, 0.16);
+}
+
+.motuo-preview-group summary {
+  display: flex;
+  min-height: 48px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 0;
+  cursor: pointer;
+  list-style: none;
+}
+
+.motuo-preview-group summary::-webkit-details-marker {
+  display: none;
+}
+
+.motuo-preview-group summary:hover {
+  color: var(--motuo-green);
+  background: rgba(250, 252, 247, 0.18);
+}
+
+.motuo-preview-group-count {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--motuo-muted);
+  font-size: 11px;
+}
+
+.motuo-preview-group[open] > summary svg {
+  rotate: 90deg;
+}
+
+.motuo-preview-group ul {
+  margin: 0 0 12px;
+  padding: 0;
+  list-style: none;
+}
+
+.motuo-preview-group li {
+  margin-top: 8px;
+  border: 1px solid rgba(138, 112, 75, 0.16);
+  border-radius: 10px;
+  padding: 12px;
+  background: rgba(250, 252, 247, 0.28);
+}
+
+.motuo-preview-group li > div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 13px;
+}
+
+.motuo-preview-group li span {
+  flex: none;
+  color: var(--motuo-muted);
+  font-size: 11px;
+}
+
+.motuo-preview-group li p {
+  margin: 4px 0 0;
+  color: var(--motuo-muted);
+  font-size: 12px;
+}
+
+.motuo-preview-group li .motuo-preview-instructions {
+  margin-top: 8px;
+  color: var(--motuo-ink);
+}
+
+.motuo-muted {
+  color: var(--motuo-muted);
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.motuo-sheet {
+  background: var(--motuo-paper);
+  box-shadow: 0 16px 56px oklch(25% 0.025 100 / 0.15);
+  position: absolute;
+  inset: 0 0 0 auto;
+  display: flex;
+  width: min(720px, 100vw);
+  height: 100dvh;
+  flex-direction: column;
+}
+
+.motuo-heading {
+  flex: none;
+  padding: 22px 36px 18px;
+}
+
+.motuo-heading h2 {
+  max-width: 25em;
+  margin: 12px 0;
+  font-size: 25px;
+  font-weight: 650;
+  line-height: 1.5;
+  letter-spacing: -0.025em;
+}
+
+.motuo-tag {
+  flex: none;
+  border: 1px solid var(--motuo-line);
+  border-radius: 4px;
+  padding: 2px 6px;
+  color: var(--motuo-green);
+  font-size: 11px;
+}
+
+.motuo-nav {
+  display: flex;
+  flex: none;
+  gap: 22px;
+  overflow-x: auto;
+  border-block: 1px solid var(--motuo-line);
+  padding: 0 36px;
+}
+
+.motuo-nav button {
+  flex: none;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  padding: 14px 0 12px;
+  color: var(--motuo-muted);
+  background: transparent;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.motuo-nav button[aria-current] {
+  border-bottom-color: var(--motuo-green);
+  color: var(--motuo-green);
+  font-weight: 700;
+}
+
+.motuo-scroll {
+  min-height: 0;
+  overflow-y: auto;
+  padding: 0 36px 32px;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+}
+
+.motuo-section {
+  padding: 30px 0;
+  border-bottom: 1px solid var(--motuo-line);
+  scroll-margin-top: 24px;
+}
+
+.motuo-section:last-child {
+  border-bottom: 0;
+  padding-bottom: 48px;
+}
+
+.motuo-section:focus {
+  outline: none;
+}
+
+.motuo-section h3 {
+  margin: 0 0 20px;
+  font-size: 19px;
+  font-weight: 650;
+  line-height: 1.5;
+}
+
+.motuo-section h4 {
+  margin: 18px 0 8px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.6;
+}
+
+.motuo-section p {
+  margin: 0 0 12px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-size: 14px;
+  line-height: 1.9;
+}
+
+.motuo-program {
+  margin-bottom: 24px;
+}
+
+.motuo-program > span {
+  color: var(--motuo-muted);
+  font-size: 11px;
+}
+
+.motuo-program p {
+  margin: 6px 0;
+  font-size: 13px;
+}
+
+.motuo-section-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.motuo-section-heading h3 {
+  margin-bottom: 8px;
+}
+
+.motuo-section-heading > span {
+  color: var(--motuo-muted);
+  font-size: 12px;
+}
+
+.motuo-people {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr));
+  align-items: start;
+  gap: 12px;
+  margin: 16px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.motuo-person-card {
+  min-width: 0;
+  padding: 14px 12px 10px;
+  border: 1px solid var(--motuo-line);
+  border-radius: 12px;
+  background: oklch(98% 0.01 90);
+}
+
+.motuo-person-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.motuo-person-avatar {
+  display: block;
+  flex: none;
+  width: 56px;
+  height: 56px;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.motuo-person-type {
+  color: var(--motuo-muted);
+  font-size: 11px;
+}
+
+.motuo-person-card > h4 {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+}
+
+.motuo-people .motuo-person-role {
+  margin: 6px 0 0;
+  color: var(--motuo-muted);
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.motuo-people .motuo-person-account {
+  margin: 10px 0 0;
+  color: var(--motuo-green);
+  font-size: 11px;
+  line-height: 1.7;
+}
+
+.motuo-person-account > span {
+  display: block;
+  color: var(--motuo-muted);
+  font-size: 10px;
+}
+
+.motuo-original-source summary {
+  width: fit-content;
+  padding: 5px 0;
+  cursor: pointer;
+}
+
+.motuo-option {
+  margin: 8px 0;
+  border: 1px solid var(--motuo-line);
+  border-radius: 12px;
+  padding: 12px 14px;
+}
+
+.motuo-option-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.motuo-platform {
+  flex: none;
+  color: var(--motuo-muted);
+  font-size: 11px;
+}
+
+.motuo-option h4 {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.motuo-option .motuo-products {
+  margin: 4px 0 0;
+  color: var(--motuo-green);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.motuo-option .motuo-instructions {
+  margin: 6px 0 0;
+  color: var(--motuo-muted);
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.motuo-option > .motuo-text-action {
+  margin-top: 4px;
+}
+
+.motuo-text-action {
+  display: inline-flex;
+  min-height: 32px;
+  align-items: center;
+  gap: 5px;
+  border: 0;
+  padding: 4px 0;
+  color: var(--motuo-green);
+  background: transparent;
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.motuo-text-action:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.motuo-option .motuo-copy-status {
+  margin: 8px 0 0;
+  color: var(--motuo-muted);
+  font-size: 11px;
+}
+
+.motuo-copy {
+  display: grid;
+  gap: 10px;
+  margin: 24px 0 28px;
+  font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", "STSong", "SimSun", serif;
+}
+
+.motuo-copy p {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.9;
+  letter-spacing: 0.03em;
+  line-break: strict;
+  text-wrap: pretty;
+}
+
+.motuo-copy .motuo-copy-emphasis {
+  margin: 8px 0;
+  border-block: 1px solid var(--motuo-line);
+  padding: 18px 0;
+  color: var(--motuo-green);
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.65;
+  letter-spacing: 0.08em;
+  text-align: center;
+}
+
+.motuo-copy-emphasis span {
+  display: block;
+}
+
+.motuo-copy .motuo-copy-closing {
+  max-width: 32em;
+  margin-inline: auto;
+  color: var(--motuo-muted);
+  font-size: 14px;
+  line-height: 1.9;
+  text-align: center;
+  text-wrap: balance;
+}
+
+.motuo-source-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 20px;
+  margin-bottom: 22px;
+}
+
+.motuo-source-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 0;
+  color: var(--motuo-green);
+  font-size: 13px;
+  text-underline-offset: 4px;
+}
+
+.motuo-original-source {
+  margin: 22px 0;
+  border-block: 1px solid var(--motuo-line);
+  padding: 12px 0;
+  color: var(--motuo-muted);
+  font-size: 12px;
+}
+
+.motuo-original-source p {
+  margin-top: 12px;
+  font-size: 12px;
+  line-height: 1.8;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.motuo-preview :is(button, summary):focus-visible,
+.motuo-sheet :is(button, a, summary):focus-visible {
+  outline: 2px solid var(--motuo-green);
+  outline-offset: 4px;
+}
+
+@media (max-width: 560px) {
+  .motuo-heading {
+    padding: 14px 20px 16px;
+  }
+
+  .motuo-heading h2 {
+    font-size: 21px;
+  }
+
+  .motuo-nav {
+    gap: 20px;
+    padding: 0 20px;
+  }
+
+  .motuo-nav button {
+    font-size: 12px;
+  }
+
+  .motuo-scroll {
+    padding: 0 20px 24px;
+  }
+
+  .motuo-copy p {
+    font-size: 15px;
+  }
+
+  .motuo-copy .motuo-copy-emphasis {
+    font-size: 24px;
+    letter-spacing: 0.05em;
+  }
+
+  .motuo-copy .motuo-copy-closing {
+    font-size: 13px;
+  }
+
+  .motuo-people {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 148px), 1fr));
+  }
+
+  .motuo-person-avatar {
+    width: 48px;
+    height: 48px;
+  }
+
+}
+
+@media (max-width: 1024px) {
+  .map-filter-bar {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px;
+    padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+  }
+
+  .filter-chip {
+    height: 36px;
+    padding: 0 6px;
+    font-size: 13px;
+  }
+}
+
 @media (max-width: 900px) {
   .story-card-overlay {
     width: min(390px, calc(100vw - 32px));
@@ -537,25 +1150,13 @@ button {
   .brand-block {
     top: 12px;
     left: 12px;
-    gap: 7px;
-    padding: 5px 9px 5px 5px;
   }
 
-  .brand-block > div:first-child {
-    width: 34px;
-    height: 34px;
+  .brand-title {
+    font-size: 18px;
   }
 
-  .brand-block > div:first-child svg {
-    width: 19px;
-    height: 19px;
-  }
-
-  .brand-block > div:last-child > div:first-child {
-    font-size: 15px;
-  }
-
-  .brand-block > div:last-child > div:last-child {
+  .brand-tagline {
     display: none;
   }
 
@@ -579,8 +1180,8 @@ button {
   .story-card-overlay {
     top: auto;
     right: 16px;
-    bottom: 92px;
-    max-height: min(68vh, 620px);
+    bottom: calc(var(--filter-bar-height, 141px) + 12px);
+    max-height: min(68vh, calc(100dvh - var(--filter-bar-height, 141px) - 96px));
     translate: 0;
     transform-origin: bottom center;
   }
@@ -592,10 +1193,6 @@ button {
   .fixed.right-5.top-5 {
     right: 12px;
     gap: 8px;
-  }
-
-  .fixed.bottom-6.left-5 {
-    display: none;
   }
 
   .primary-button {

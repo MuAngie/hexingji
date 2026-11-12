@@ -2,18 +2,13 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import {
-  ChevronRight,
-  ExternalLink,
   HelpCircle,
   MapPin,
   Minus,
   Plus,
   RotateCcw,
   RotateCw,
-  Search,
-  Sprout,
-  Wheat,
-  X
+  Search
 } from "lucide-react";
 import {
   type CSSProperties,
@@ -30,49 +25,29 @@ import {
 import {
   actionFilters,
   type ActionFilter,
-  coordinateAccuracyLabels,
   filterLocations,
   type HejiLocation,
-  impactStatusLabels,
-  locations,
-  nodeTypeLabels,
-  verificationStatusLabels
+  locations
 } from "@/data/projects";
 import { latLngToMapPosition } from "@/data/mapProjection";
 import monthlyCropManifest from "../../public/markers/monthly-v2/manifest.json";
+import { ProjectDetail, ProjectStoryCard } from "./ProjectContent";
 
-const directSupportCount = locations.filter(
-  (location) => location.nodeType === "direct_support"
-).length;
-const publicActionCount = locations.filter(
-  (location) => location.nodeType === "public_action"
-).length;
-const industryObservationCount = locations.filter(
-  (location) => location.nodeType === "industry_observation"
-).length;
-const verifiedLocationCount = locations.filter(
-  (location) => location.verificationStatus === "verified"
-).length;
+type MonthlyCrop = (typeof monthlyCropManifest.months)[number];
+const initialMapScale = 1.4;
 
 const mapStats = [
   ["助农与公益项目", String(locations.length)],
-  ["直接助农", String(directSupportCount)],
-  ["公众行动", String(publicActionCount)],
-  ["产业观察", String(industryObservationCount)],
-  ["已核验项目", String(verifiedLocationCount)]
+  ...actionFilters.filter((filter) => filter !== "全部")
+    .map((filter) => [filter, String(filterLocations(locations, filter).length)])
 ];
 
 function BrandBlock() {
   return (
-    <div className="brand-block glass-surface fixed left-5 top-5 z-30 flex items-center gap-3 rounded-full px-4 py-3">
-      <div className="grid size-11 place-items-center rounded-full bg-[#5f8f3e] text-[#fff8e8] shadow-inner">
-        <Sprout size={24} strokeWidth={2.4} />
-      </div>
-      <div>
-        <div className="text-xl font-semibold text-[#4a321d]">禾迹</div>
-        <div className="text-xs text-[#7a603f]">
-          把每一次奔赴，种进真实的土地里。
-        </div>
+    <div className="brand-block fixed left-5 top-5 z-30">
+      <div className="brand-title text-xl font-semibold text-[#4a321d]">禾迹</div>
+      <div className="brand-tagline mt-1 text-xs text-[#7a603f]">
+        把每一次奔赴，种进真实的土地里。
       </div>
     </div>
   );
@@ -140,23 +115,26 @@ function MapIllustration() {
 }
 function LocationMarker({
   location,
-  markerImageSrc,
+  markerCrop,
   rotation,
   selected,
   onSelect
 }: {
   location: HejiLocation;
-  markerImageSrc: string | null;
+  markerCrop: MonthlyCrop | null;
   rotation: number;
   selected: boolean;
   onSelect: (location: HejiLocation) => void;
 }) {
-  const position = latLngToMapPosition(location.coordinates);
+  const markerImageSize = Math.max(64, 32 / (markerCrop?.heightRatio ?? 1));
+  const markerVisibleHeight = markerImageSize * (markerCrop?.heightRatio ?? 1);
+  const markerImageSrc = markerCrop ? `/markers/monthly-v2/${markerCrop.png}` : null;
+  const position = latLngToMapPosition(location.displayCoordinates);
   const swayIndex = locations.findIndex((point) => point.id === location.id);
   const sharedCoordinate = locations.some(
     (point) => point.id !== location.id &&
-      point.coordinates.latitude === location.coordinates.latitude &&
-      point.coordinates.longitude === location.coordinates.longitude
+      point.displayCoordinates.latitude === location.displayCoordinates.latitude &&
+      point.displayCoordinates.longitude === location.displayCoordinates.longitude
   );
 
   return (
@@ -167,7 +145,7 @@ function LocationMarker({
       style={{
         left: `${position.x}%`,
         top: `${position.y}%`,
-        transform: "scale(var(--marker-inverse-scale, 1))",
+        transform: "scale(calc(var(--marker-inverse-scale, 1) * var(--marker-zoom-scale, 1)))",
         transformOrigin: "0 0",
         willChange: "transform"
       }}
@@ -176,13 +154,16 @@ function LocationMarker({
         layout
         style={
           {
+            "--marker-size": `${markerImageSize}px`,
+            "--marker-visible-height": `${markerVisibleHeight}px`,
+            "--marker-image-anchor": `${monthlyCropManifest.anchor.y * 100}%`,
             "--compact-offset-x": `${sharedCoordinate
               ? Math.sign(location.compactOffset?.x ?? 0) * 12
               : (location.compactOffset?.x ?? 0) * 0.4}px`,
             "--compact-offset-y": `${sharedCoordinate
               ? 0
               : (location.compactOffset?.y ?? 0) * 0.4}px`,
-            "--marker-root-offset": `${(monthlyCropManifest.anchor.y - 0.5) * 32}px`,
+            "--marker-root-offset": `${markerVisibleHeight / 2}px`,
             "--sway-duration": `${4.8 + (swayIndex % 4) * 0.45}s`,
             "--sway-delay": `${-swayIndex * 0.63}s`
           } as CSSProperties
@@ -204,8 +185,8 @@ function LocationMarker({
           {markerImageSrc ? (
             <img
               src={markerImageSrc}
-              width={32}
-              height={32}
+              width={markerImageSize}
+              height={markerImageSize}
               alt=""
               aria-hidden="true"
               draggable={false}
@@ -218,158 +199,6 @@ function LocationMarker({
   );
 }
 
-function StorySection({
-  title,
-  children
-}: {
-  title: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <section className="story-detail">
-      <h3>{title}</h3>
-      <p>{children}</p>
-    </section>
-  );
-}
-
-function LocationStoryCard({
-  location,
-  onShowDetails
-}: {
-  location: HejiLocation;
-  onShowDetails: () => void;
-}) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.94, y: 12 }}
-      animate={{ opacity: 1, scale: 1, y: 0 }}
-      exit={{ opacity: 0, scale: 0.96, y: 8 }}
-      transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
-      className="story-card-overlay glass-surface"
-      onClick={(event) => event.stopPropagation()}
-    >
-      <div className="story-card-header">
-        <div className="min-w-0">
-          <div className="flex items-start gap-2 text-lg font-bold leading-6 text-[#4a321d]">
-            <Wheat size={19} className="text-[#d5a333]" />
-            <span>{location.name}</span>
-          </div>
-          <div className="mt-2 flex flex-wrap gap-1.5">
-            <span className="type-pill">
-              {nodeTypeLabels[location.nodeType]}
-            </span>
-          </div>
-        </div>
-        <MapPin className="mt-1 text-[#6f9b4b]" size={24} />
-      </div>
-      <div className="story-card-scroll">
-        <StorySection title="面对的问题">{location.problem}</StorySection>
-        <StorySection title="参与方式">{location.participation}</StorySection>
-        <StorySection title="关注对象">
-          {location.focusTargets}
-        </StorySection>
-      </div>
-
-      <div className="story-card-footer">
-        <button className="story-more-button" onClick={onShowDetails}>
-          查看完整资料 <ChevronRight size={16} />
-        </button>
-        <button className="primary-button">记录我的禾迹</button>
-      </div>
-    </motion.div>
-  );
-}
-
-function LocationDetailSheet({
-  location,
-  onClose
-}: {
-  location: HejiLocation;
-  onClose: () => void;
-}) {
-  return (
-    <motion.div
-      className="project-detail-backdrop"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      onClick={onClose}
-    >
-      <motion.aside
-        role="dialog"
-        aria-modal="true"
-        aria-label={`${location.name}完整资料`}
-        className="project-detail-sheet glass-surface"
-        initial={{ x: "100%" }}
-        animate={{ x: 0 }}
-        exit={{ x: "100%" }}
-        transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
-        onClick={(event) => event.stopPropagation()}
-      >
-        <div className="project-detail-heading">
-          <div>
-            <div className="project-detail-eyebrow">项目资料 · {location.id}</div>
-            <h2>{location.name}</h2>
-          </div>
-          <button className="project-detail-close" onClick={onClose} aria-label="关闭完整资料">
-            <X size={20} />
-          </button>
-        </div>
-        <div className="project-detail-scroll">
-          <div className="project-detail-meta">
-            <div className="flex flex-wrap gap-1.5">
-              <span className="type-pill">{nodeTypeLabels[location.nodeType]}</span>
-              <span className="type-pill">{coordinateAccuracyLabels[location.coordinateAccuracy]}</span>
-              <span className="type-pill">{verificationStatusLabels[location.verificationStatus]}</span>
-            </div>
-            <p>{location.region}</p>
-            <div className="project-detail-coordinates">
-              <span>坐标 {location.coordinates.latitude.toFixed(5)}, {location.coordinates.longitude.toFixed(5)}</span>
-              <span>{location.verificationDateLabel ?? "最近核验"} {location.lastVerified}</span>
-            </div>
-          </div>
-          <StorySection title="节目节点">{location.program}</StorySection>
-          <StorySection title="关注对象">
-            {location.focusTargets}
-          </StorySection>
-          <StorySection title="面对的问题">{location.problem}</StorySection>
-          <StorySection title="十个勤天做了什么">{location.action}</StorySection>
-          <StorySection title="参与方式">{location.participation}</StorySection>
-          {location.quote ? (
-            <StorySection title="金句文案">{location.quote}</StorySection>
-          ) : null}
-          <StorySection title="当前状态与后续结果">{location.result}</StorySection>
-          {location.verificationNotes ? (
-            <StorySection title="核验说明">{location.verificationNotes}</StorySection>
-          ) : null}
-          <div className="story-sources">
-            <h3>资料来源</h3>
-            <div className="flex flex-wrap gap-2">
-              {location.sources.map((source) => (
-                <a
-                  key={source.url}
-                  className="source-link"
-                  href={source.url}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  {source.label}
-                  <ExternalLink size={12} />
-                </a>
-              ))}
-            </div>
-          </div>
-          <StorySection title="来源与核验记录">{location.sourceNotes}</StorySection>
-          <p className="project-detail-status">
-            {verificationStatusLabels[location.verificationStatus]} · {impactStatusLabels[location.impactStatus]}
-          </p>
-        </div>
-      </motion.aside>
-    </motion.div>
-  );
-}
-
 function FilterBar({
   active,
   onChange
@@ -377,47 +206,32 @@ function FilterBar({
   active: ActionFilter;
   onChange: (filter: ActionFilter) => void;
 }) {
+  const barRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const bar = barRef.current!;
+    const updateHeight = () => {
+      bar.closest("main")?.style.setProperty("--filter-bar-height", `${bar.offsetHeight}px`);
+    };
+    updateHeight();
+    const observer = new ResizeObserver(updateHeight);
+    observer.observe(bar);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <div className="glass-surface fixed bottom-6 left-1/2 z-30 flex max-w-[calc(100vw-2rem)] -translate-x-1/2 gap-2 overflow-x-auto rounded-full p-2">
+    <nav ref={barRef} aria-label="按参与方式筛选项目" className="map-filter-bar glass-surface" style={{ "--filter-count": actionFilters.length } as CSSProperties}>
       {actionFilters.map((filter) => (
         <button
           key={filter}
           className={`filter-chip ${active === filter ? "filter-chip-active" : ""}`}
+          aria-pressed={active === filter}
           onClick={() => onChange(filter)}
         >
           {filter}
         </button>
       ))}
-    </div>
-  );
-}
-
-function PersonalCard() {
-  return (
-    <div className="glass-surface fixed bottom-6 left-5 z-30 w-60 rounded-[24px] p-4">
-      <div className="text-base font-bold text-[#4a321d]">助农地图资料库</div>
-      <div className="mt-1 text-xs text-[#7a603f]">
-        《种地吧》项目汇总 · v3
-      </div>
-      <div className="mt-4 grid grid-cols-3 gap-2 text-center">
-        {[
-          ["项目地点", String(locations.length)],
-          ["直接助农", String(directSupportCount)],
-          ["公众行动", String(publicActionCount)]
-        ].map(([label, value]) => (
-          <div key={label} className="rounded-2xl bg-white/20 px-2 py-3">
-            <div className="text-lg font-bold text-[#4f8b3f]">{value}</div>
-            <div className="mt-1 text-[11px] text-[#7a603f]">{label}</div>
-          </div>
-        ))}
-      </div>
-      <div className="mt-2 text-center text-xs text-[#7a603f]">
-        产业观察 {industryObservationCount} 项
-      </div>
-      <div className="mt-4 rounded-full bg-white/20 px-3 py-2 text-center text-xs font-bold text-[#7a603f]">
-        WGS-84 · 表格同步于 2026-10-14
-      </div>
-    </div>
+    </nav>
   );
 }
 
@@ -431,7 +245,7 @@ function MapControls({
   const { zoomIn, zoomOut, resetTransform } = useControls();
 
   return (
-    <div className="glass-surface fixed bottom-6 right-5 z-30 grid gap-2 rounded-[24px] p-2">
+    <div className="map-controls glass-surface fixed right-5 z-30 grid gap-2 rounded-[24px] p-2">
       <button
         className="control-button"
         aria-label="放大"
@@ -476,13 +290,13 @@ function MapControls({
 
 export function HejiMapApp() {
   const [activeFilter, setActiveFilter] = useState<ActionFilter>("全部");
-  const [markerImageSrc, setMarkerImageSrc] = useState<string | null>(null);
+  const [markerCrop, setMarkerCrop] = useState<MonthlyCrop | null>(null);
   const [selectedLocation, setSelectedLocation] =
     useState<HejiLocation | null>(null);
   const [showDetails, setShowDetails] = useState(false);
   const [rotation, setRotation] = useState(0);
   const mapStageRef = useRef<HTMLDivElement>(null);
-  const mapScaleRef = useRef(1);
+  const mapScaleRef = useRef(initialMapScale);
 
   const visibleLocations = useMemo(
     () => filterLocations(locations, activeFilter),
@@ -494,7 +308,7 @@ export function HejiMapApp() {
       timeZone: "Asia/Shanghai",
       month: "numeric"
     }).format(new Date()));
-    setMarkerImageSrc(`/markers/monthly-v2/${monthlyCropManifest.months[month - 1].png}`);
+    setMarkerCrop(monthlyCropManifest.months[month - 1]);
   }, []);
 
   useEffect(() => {
@@ -509,9 +323,9 @@ export function HejiMapApp() {
   return (
     <main className="relative h-screen w-screen overflow-hidden bg-[var(--map-background)] text-[#4a321d]">
       <TransformWrapper
-        initialScale={1}
+        initialScale={initialMapScale}
         minScale={0.8}
-        maxScale={6}
+        maxScale={24}
         centerOnInit
         smooth
         onTransform={(_ref, state) => {
@@ -519,6 +333,10 @@ export function HejiMapApp() {
           mapStageRef.current?.style.setProperty(
             "--marker-inverse-scale",
             String(1 / state.scale)
+          );
+          mapStageRef.current?.style.setProperty(
+            "--marker-zoom-scale",
+            String(Math.min(1.5, Math.max(1, Math.sqrt(state.scale))))
           );
           if (mapStageRef.current) {
             mapStageRef.current.dataset.markerOffsets =
@@ -547,6 +365,10 @@ export function HejiMapApp() {
           >
             <motion.div
               ref={mapStageRef}
+              style={{
+                "--marker-inverse-scale": 1 / initialMapScale,
+                "--marker-zoom-scale": Math.sqrt(initialMapScale)
+              } as CSSProperties}
               data-marker-density="compact"
               data-marker-offsets={
                 mapScaleRef.current < 1.6 ? "spread" : "exact"
@@ -561,7 +383,7 @@ export function HejiMapApp() {
                   <LocationMarker
                     key={location.id}
                     location={location}
-                    markerImageSrc={markerImageSrc}
+                    markerCrop={markerCrop}
                     rotation={rotation}
                     selected={selectedLocation?.id === location.id}
                     onSelect={(location) => {
@@ -584,14 +406,14 @@ export function HejiMapApp() {
         visibleLocations.some(
           (location) => location.id === selectedLocation.id
         ) ? (
-          <LocationStoryCard
+          <ProjectStoryCard
             key={selectedLocation.id}
             location={selectedLocation}
             onShowDetails={() => setShowDetails(true)}
+            onClose={() => setSelectedLocation(null)}
           />
         ) : null}
       </AnimatePresence>
-      <PersonalCard />
       <FilterBar active={activeFilter} onChange={(filter) => {
         setActiveFilter(filter);
         setSelectedLocation(null);
@@ -599,7 +421,7 @@ export function HejiMapApp() {
       }} />
       <AnimatePresence>
         {selectedLocation && showDetails ? (
-          <LocationDetailSheet
+          <ProjectDetail
             key={selectedLocation.id}
             location={selectedLocation}
             onClose={() => setShowDetails(false)}
