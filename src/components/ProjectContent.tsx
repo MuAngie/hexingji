@@ -7,12 +7,44 @@ import { getProjectView, type HejiLocation } from "@/data/projects";
 import { ParticipationGroups } from "./ProjectParticipation";
 import { ChibiAvatar } from "./ChibiAvatar";
 
+async function requestVisitCount(url: string, method: "GET" | "POST", signal?: AbortSignal) {
+  const response = await fetch(url, { method, cache: "no-store", signal });
+  if (!response.ok) throw new Error("Visit count unavailable");
+  const { count } = await response.json();
+  if (!Number.isSafeInteger(count) || count < 0) throw new Error("Invalid visit count");
+  return count as number;
+}
+
 export function ProjectStoryCard({ location, onShowDetails, onClose }: {
   location: HejiLocation;
   onShowDetails: () => void;
   onClose: () => void;
 }) {
   const { project, groups, categories, programText } = getProjectView(location.id);
+  const [visitCount, setVisitCount] = useState<number | null>(null);
+  const [visitError, setVisitError] = useState<string | null>(null);
+  const visitUrl = `/api/visits/${project.id}`;
+
+  useEffect(() => {
+    const controller = new AbortController();
+    requestVisitCount(visitUrl, "GET", controller.signal)
+      .then((count) => setVisitCount((current) => Math.max(current ?? 0, count)))
+      .catch(() => {
+        if (!controller.signal.aborted) setVisitError("计数暂不可用");
+      });
+    return () => controller.abort();
+  }, [visitUrl]);
+
+  async function recordVisit() {
+    try {
+      const count = await requestVisitCount(visitUrl, "POST");
+      setVisitCount((current) => Math.max(current ?? 0, count));
+      setVisitError(null);
+    } catch {
+      setVisitError("连接失败，请重试");
+    }
+  }
+
   return (
     <motion.section
       aria-label="项目概览"
@@ -46,7 +78,12 @@ export function ProjectStoryCard({ location, onShowDetails, onClose }: {
       </div>
       <div className="story-card-footer">
         <button className="story-more-button" onClick={onShowDetails}>查看完整资料<ChevronRight size={16} /></button>
-        <button className="primary-button">记录我的禾迹</button>
+        <div className="flex flex-col items-end gap-1">
+          <button className="primary-button inline-flex items-center gap-2" onClick={recordVisit} aria-label={visitCount === null ? `禾来过，${visitError ?? "累计次数加载中"}` : `禾来过，累计 ${visitCount} 次`}>
+            <span>禾来过</span><span className="tabular-nums" aria-live="polite" aria-atomic="true">{visitCount ?? "..."}</span>
+          </button>
+          {visitError ? <span className="text-[11px] font-normal text-[var(--motuo-muted)]" role="status">{visitError}</span> : null}
+        </div>
       </div>
     </motion.section>
   );

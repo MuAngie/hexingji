@@ -5,6 +5,7 @@ archive/
 node_modules/
 .pnpm-store/
 .next/
+.wrangler/
 out/
 dist/
 coverage/

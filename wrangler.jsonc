@@ -1,7 +1,18 @@
 {
   "name": "hexingji",
+  "main": "worker/index.js",
   "compatibility_date": "2026-10-24",
   "assets": {
-    "directory": "./out"
-  }
+    "directory": "./out",
+    "binding": "ASSETS",
+    "run_worker_first": ["/api/*"]
+  },
+  "durable_objects": {
+    "bindings": [
+      { "name": "PROJECT_VISITS", "class_name": "ProjectVisitCounter" }
+    ]
+  },
+  "migrations": [
+    { "tag": "visits-v1", "new_sqlite_classes": ["ProjectVisitCounter"] }
+  ]
 }

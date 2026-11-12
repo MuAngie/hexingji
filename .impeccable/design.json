@@ -1,0 +1,278 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-12T13:42:52.030Z",
+  "title": "禾迹 · 已确认界面规则",
+  "extensions": {
+    "colorMeta": {
+      "map-background": {
+        "displayName": "地图外围背景",
+        "role": "neutral",
+        "tonalRamp": [
+          "oklch(15.00% 0.0029 84.56)",
+          "oklch(26.43% 0.0029 84.56)",
+          "oklch(37.86% 0.0029 84.56)",
+          "oklch(49.29% 0.0029 84.56)",
+          "oklch(60.71% 0.0029 84.56)",
+          "oklch(72.14% 0.0029 84.56)",
+          "oklch(83.57% 0.0029 84.56)",
+          "oklch(95.00% 0.0029 84.56)"
+        ]
+      },
+      "soil": {
+        "displayName": "棕色文字",
+        "role": "neutral",
+        "tonalRamp": [
+          "oklch(15.00% 0.0481 61.30)",
+          "oklch(26.43% 0.0481 61.30)",
+          "oklch(37.86% 0.0481 61.30)",
+          "oklch(49.29% 0.0481 61.30)",
+          "oklch(60.71% 0.0481 61.30)",
+          "oklch(72.14% 0.0481 61.30)",
+          "oklch(83.57% 0.0481 61.30)",
+          "oklch(95.00% 0.0481 61.30)"
+        ]
+      },
+      "muted-soil": {
+        "displayName": "棕色辅助文字",
+        "role": "neutral",
+        "tonalRamp": [
+          "oklch(15.00% 0.0584 72.52)",
+          "oklch(26.43% 0.0584 72.52)",
+          "oklch(37.86% 0.0584 72.52)",
+          "oklch(49.29% 0.0584 72.52)",
+          "oklch(60.71% 0.0584 72.52)",
+          "oklch(72.14% 0.0584 72.52)",
+          "oklch(83.57% 0.0584 72.52)",
+          "oklch(95.00% 0.0584 72.52)"
+        ]
+      },
+      "leaf": {
+        "displayName": "自然绿",
+        "role": "primary",
+        "tonalRamp": [
+          "oklch(15.00% 0.1236 134.25)",
+          "oklch(26.43% 0.1236 134.25)",
+          "oklch(37.86% 0.1236 134.25)",
+          "oklch(49.29% 0.1236 134.25)",
+          "oklch(60.71% 0.1236 134.25)",
+          "oklch(72.14% 0.1236 134.25)",
+          "oklch(83.57% 0.1236 134.25)",
+          "oklch(95.00% 0.1236 134.25)"
+        ]
+      },
+      "wheat": {
+        "displayName": "麦穗金",
+        "role": "accent",
+        "tonalRamp": [
+          "oklch(15.00% 0.1313 85.20)",
+          "oklch(26.43% 0.1313 85.20)",
+          "oklch(37.86% 0.1313 85.20)",
+          "oklch(49.29% 0.1313 85.20)",
+          "oklch(60.71% 0.1313 85.20)",
+          "oklch(72.14% 0.1313 85.20)",
+          "oklch(83.57% 0.1313 85.20)",
+          "oklch(95.00% 0.1313 85.20)"
+        ]
+      },
+      "project-paper": {
+        "displayName": "详情纸面",
+        "role": "neutral",
+        "tonalRamp": [
+          "oklch(15.00% 0.0130 90.00)",
+          "oklch(26.43% 0.0130 90.00)",
+          "oklch(37.86% 0.0130 90.00)",
+          "oklch(49.29% 0.0130 90.00)",
+          "oklch(60.71% 0.0130 90.00)",
+          "oklch(72.14% 0.0130 90.00)",
+          "oklch(83.57% 0.0130 90.00)",
+          "oklch(95.00% 0.0130 90.00)"
+        ]
+      },
+      "project-ink": {
+        "displayName": "详情正文",
+        "role": "neutral",
+        "tonalRamp": [
+          "oklch(15.00% 0.0350 65.00)",
+          "oklch(26.43% 0.0350 65.00)",
+          "oklch(37.86% 0.0350 65.00)",
+          "oklch(49.29% 0.0350 65.00)",
+          "oklch(60.71% 0.0350 65.00)",
+          "oklch(72.14% 0.0350 65.00)",
+          "oklch(83.57% 0.0350 65.00)",
+          "oklch(95.00% 0.0350 65.00)"
+        ]
+      },
+      "project-muted": {
+        "displayName": "详情辅助文字",
+        "role": "neutral",
+        "tonalRamp": [
+          "oklch(15.00% 0.0250 70.00)",
+          "oklch(26.43% 0.0250 70.00)",
+          "oklch(37.86% 0.0250 70.00)",
+          "oklch(49.29% 0.0250 70.00)",
+          "oklch(60.71% 0.0250 70.00)",
+          "oklch(72.14% 0.0250 70.00)",
+          "oklch(83.57% 0.0250 70.00)",
+          "oklch(95.00% 0.0250 70.00)"
+        ]
+      },
+      "project-green": {
+        "displayName": "详情强调绿",
+        "role": "primary",
+        "tonalRamp": [
+          "oklch(15.00% 0.0750 140.00)",
+          "oklch(26.43% 0.0750 140.00)",
+          "oklch(37.86% 0.0750 140.00)",
+          "oklch(49.29% 0.0750 140.00)",
+          "oklch(60.71% 0.0750 140.00)",
+          "oklch(72.14% 0.0750 140.00)",
+          "oklch(83.57% 0.0750 140.00)",
+          "oklch(95.00% 0.0750 140.00)"
+        ]
+      },
+      "project-line": {
+        "displayName": "详情分隔线",
+        "role": "neutral",
+        "tonalRamp": [
+          "oklch(15.00% 0.0200 90.00)",
+          "oklch(26.43% 0.0200 90.00)",
+          "oklch(37.86% 0.0200 90.00)",
+          "oklch(49.29% 0.0200 90.00)",
+          "oklch(60.71% 0.0200 90.00)",
+          "oklch(72.14% 0.0200 90.00)",
+          "oklch(83.57% 0.0200 90.00)",
+          "oklch(95.00% 0.0200 90.00)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "body": {
+        "displayName": "详情正文",
+        "purpose": "公开资料正文"
+      },
+      "project-title": {
+        "displayName": "项目标题",
+        "purpose": "保留竖线后的固定换行"
+      },
+      "story": {
+        "displayName": "文案正文",
+        "purpose": "衬线文字排版"
+      },
+      "story-emphasis": {
+        "displayName": "文案重点句",
+        "purpose": "绿色居中强调句"
+      }
+    },
+    "shadows": [
+      {
+        "name": "glass-surface",
+        "value": "inset 0 1px 0 rgba(255,255,255,.65), inset 0 -1px 0 rgba(255,255,255,.12), 0 10px 30px rgba(48,57,44,.1)",
+        "purpose": "地图磨砂浮层"
+      },
+      {
+        "name": "detail-sheet",
+        "value": "0 16px 56px oklch(25% 0.025 100 / 0.15)",
+        "purpose": "右侧资料抽屉"
+      }
+    ],
+    "motion": [
+      {
+        "name": "overview-enter",
+        "value": "0.2s",
+        "purpose": "概览淡入并上移"
+      },
+      {
+        "name": "detail-enter",
+        "value": "0.22s cubic-bezier(0.16,1,0.3,1)",
+        "purpose": "详情从右侧进入"
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "mobile-detail",
+        "value": "560px"
+      },
+      {
+        "name": "overview-width",
+        "value": "900px"
+      },
+      {
+        "name": "filter-grid",
+        "value": "1024px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "主按钮",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "现有绿色胶囊按钮；这里只预览外观。",
+      "html": "<button class=\"ds-primary\" type=\"button\">记录我的禾迹</button>",
+      "css": ".ds-primary{font-family:Inter, \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans SC\", sans-serif;min-height:42px;border:0;border-radius:999px;padding:0 16px;font-weight:700;color:#fffaf0;background:linear-gradient(135deg,rgba(106,154,69,.9),rgba(63,127,53,.84));box-shadow:inset 0 0 0 1px rgba(255,255,255,.28),inset 0 1px 0 rgba(255,255,255,.35),0 8px 20px rgba(63,127,53,.18);backdrop-filter:blur(16px);transition:transform 160ms ease}.ds-primary:hover{transform:translateY(-1px)}.ds-primary:focus-visible{outline:2px solid oklch(43% 0.075 140);outline-offset:4px;}"
+    },
+    {
+      "name": "底部分类项",
+      "kind": "chip",
+      "refersTo": "filter-chip",
+      "description": "单选分类，绿色表示当前筛选；整栏布局见 DESIGN.md。",
+      "html": "<div class=\"ds-filters\"><button class=\"ds-chip ds-active\" aria-pressed=\"true\">全部</button><button class=\"ds-chip\" aria-pressed=\"false\">购买助农</button></div>",
+      "css": ".ds-filters{display:flex;gap:8px}.ds-chip{font-family:Inter, \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans SC\", sans-serif;height:40px;border:0;border-radius:999px;padding:0 8px;color:#6f5433;background:transparent;font-size:14px;font-weight:700;transition:background 180ms ease,color 180ms ease,box-shadow 180ms ease}.ds-active{color:#fffaf0;background:rgba(79,125,53,.88);box-shadow:inset 0 1px 0 rgba(255,255,255,.32),0 6px 16px rgba(95,143,62,.18)}.ds-chip:focus-visible{outline:2px solid oklch(43% 0.075 140);outline-offset:4px;}"
+    },
+    {
+      "name": "参与条目",
+      "kind": "card",
+      "refersTo": "participation-card",
+      "description": "内容决定高度，平台与名称同行。",
+      "html": "<article class=\"ds-option\"><div class=\"ds-option-heading\"><h4>玛迪村</h4><span>线下</span></div><p class=\"ds-products\">香蕉等时鲜水果</p><p class=\"ds-instructions\">建议自驾游、鲜果线下购买以保证品质。</p></article>",
+      "css": ".ds-option{font-family:Inter, \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans SC\", sans-serif;margin:8px 0;border:1px solid oklch(87% .02 90);border-radius:12px;padding:12px 14px;color:oklch(32% .035 65)}.ds-option-heading{display:flex;align-items:baseline;justify-content:space-between;gap:12px}.ds-option h4{margin:0;font-size:15px;line-height:1.5;overflow-wrap:anywhere}.ds-option-heading span{font-size:11px;color:oklch(48% .025 70)}.ds-products{margin:4px 0 0;font-size:13px;line-height:1.6;color:oklch(43% .075 140)}.ds-instructions{margin:6px 0 0;font-size:13px;line-height:1.65;color:oklch(48% .025 70)}"
+    },
+    {
+      "name": "人物卡片",
+      "kind": "card",
+      "refersTo": "person-card",
+      "description": "无性别代码头像，示例文字为字段占位；实际记录按唯一编号生成。",
+      "html": "<article class=\"ds-person\"><div class=\"ds-person-top\"><svg class=\"ds-avatar\" viewBox=\"0 0 96 96\" aria-hidden=\"true\"><circle cx=\"48\" cy=\"48\" r=\"48\" fill=\"oklch(90% .04 145)\"/><path d=\"M17 96Q18 65 48 65Q78 65 79 96\" fill=\"oklch(65% .08 145)\"/><ellipse cx=\"48\" cy=\"44\" rx=\"25\" ry=\"28\" fill=\"oklch(84% .06 65)\"/><path d=\"M23 42Q17 9 48 12Q78 9 73 42L59 28L44 34L33 27Z\" fill=\"oklch(35% .03 65)\"/><circle cx=\"39\" cy=\"45\" r=\"2.5\" fill=\"oklch(30% .02 65)\"/><circle cx=\"57\" cy=\"45\" r=\"2.5\" fill=\"oklch(30% .02 65)\"/><path d=\"M42 56Q48 61 54 56\" fill=\"none\" stroke=\"oklch(40% .04 65)\" stroke-width=\"2\" stroke-linecap=\"round\"/></svg><span>对象类型</span></div><h4>姓名／名称</h4><p>表中填写的角色关系</p></article>",
+      "css": ".ds-person{font-family:Inter, \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans SC\", sans-serif;width:180px;box-sizing:border-box;border:1px solid oklch(87% .02 90);border-radius:12px;padding:14px 12px 10px;background:oklch(98% .01 90);color:oklch(32% .035 65)}.ds-person-top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px}.ds-avatar{display:block;width:56px;height:56px;border-radius:50%;overflow:hidden}.ds-person-top span{font-size:11px;color:oklch(48% .025 70)}.ds-person h4{margin:0;font-size:14px;line-height:1.55}.ds-person p{margin:6px 0 0;font-size:12px;line-height:1.7;color:oklch(48% .025 70)}"
+    },
+    {
+      "name": "详情章节导航",
+      "kind": "nav",
+      "description": "头部固定导航；绿色下划线表示当前章节。",
+      "html": "<nav class=\"ds-nav\" aria-label=\"项目内容导航\"><button aria-current=\"location\">文案</button><button>项目概况</button><button>参与方式</button></nav>",
+      "css": ".ds-nav{display:flex;gap:22px;border-block:1px solid oklch(87% .02 90);padding:0 36px;overflow-x:auto}.ds-nav button{font-family:Inter, \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans SC\", sans-serif;flex:none;border:0;border-bottom:2px solid transparent;padding:14px 0 12px;color:oklch(48% .025 70);background:transparent;font-size:13px;cursor:pointer}.ds-nav button[aria-current]{border-bottom-color:oklch(43% .075 140);color:oklch(43% .075 140);font-weight:700}.ds-nav button:focus-visible{outline:2px solid oklch(43% 0.075 140);outline-offset:4px;}"
+    },
+    {
+      "name": "禾来过共享计数",
+      "kind": "button",
+      "refersTo": "visit-counter-button",
+      "description": "各项目分别累计所有访客点击次数，每次点击提交服务端加 1；示例 0 为外观预览。",
+      "html": "<button class=\"ds-primary ds-visit\" type=\"button\" aria-label=\"禾来过，累计 0 次\"><span>禾来过</span><span class=\"ds-count\">0</span></button>",
+      "css": ".ds-primary{font-family:Inter, \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans SC\", sans-serif;min-height:42px;border:0;border-radius:999px;padding:0 16px;font-weight:700;color:#fffaf0;background:linear-gradient(135deg,rgba(106,154,69,.9),rgba(63,127,53,.84));box-shadow:inset 0 0 0 1px rgba(255,255,255,.28),inset 0 1px 0 rgba(255,255,255,.35),0 8px 20px rgba(63,127,53,.18);backdrop-filter:blur(16px);transition:transform 160ms ease}.ds-primary:hover{transform:translateY(-1px)}.ds-primary:focus-visible{outline:2px solid oklch(43% 0.075 140);outline-offset:4px;}.ds-visit{display:inline-flex;align-items:center;gap:8px;min-height:38px}.ds-count{font-variant-numeric:tabular-nums}"
+    }
+  ],
+  "narrative": {
+    "overview": "本文件记录截至 **2026-11-12** 已确认的界面决定，供后续修改对照。墨脱农业项目形成的内容结构、卡片和人物展示标准，现适用于所有项目；各项目具体文字以最新分表维护表为准。\n\n整体以地形地图为主体，延续自然绿色、米白纸面、棕色文字和半透明磨砂浮层。地图浏览、项目概览、完整资料形成三个阅读层次。卡片按内容自适应高度，减少空余和重复说明。\n\n**界面重点：**\n\n- 地图铺满视口，分类固定在页面最底部。\n- 点位植物按打开页面时的月份切换，保持可见、可点击。\n- 项目概览先提供概况与参与方式，完整资料在右侧展开。\n- 公开页面展示项目内容；维护字段和编辑提示不作为正文展示。\n\n数据维护文件为 `outputs/heji-maintenance-20261031/禾伙人助农公益地图_分表维护版_v1.xlsx`。界面规则与表格内容分开维护：文字、人物编号、参与条目更新后通过导入同步，不能只改某张页面中的副本。",
+    "keyCharacteristics": [
+      "地图铺满视口，分类固定在页面最底部。",
+      "点位植物按打开页面时的月份切换，保持可见、可点击。",
+      "项目概览先提供概况与参与方式，完整资料在右侧展开。",
+      "公开页面展示项目内容；维护字段和编辑提示不作为正文展示。"
+    ],
+    "dos": [
+      "Do 所有项目沿用已确认的墨脱展示标准，具体数据从最新维护表同步。",
+      "Do 保留标题第一行末尾的 `｜`，保持规定的章节顺序，资料来源置底。",
+      "Do 让参与类别默认折叠，卡片按内容收紧，人物列数响应可用宽度。",
+      "Do 保持底部筛选满铺且全部可见，检查浮层和工具不与分类栏重叠。",
+      "Do 区分真实坐标、显示偏移和示意位置；保留原文、来源与必要的参与限制。"
+    ],
+    "donts": [
+      "Don't 恢复左下统计卡、左上品牌卡片／图标、两个旋转按钮，或旧的三个手工分类。",
+      "Don't 把项目概览改成不透明的大纸卡，或给短条目设置大量空白和固定高卡片。",
+      "Don't 在文案正文重复“文案”标题，恢复头部关系／线索汇总行，或把资料来源移回文案后。",
+      "Don't 恢复“当地有什么”“当前状态与后续结果”，或直接渲染四个维护列和编辑提示。",
+      "Don't 伪造人物、坐标、来源、公开账号或可购买／可报名状态。",
+      "Don't 把右上角预留的搜索、记录入口描述为已实现的功能。"
+    ]
+  }
+}
