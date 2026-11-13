@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-12T13:42:52.030Z",
+  "generatedAt": "2026-11-13T08:49:57.883Z",
   "title": "禾迹 · 已确认界面规则",
   "extensions": {
     "colorMeta": {
@@ -246,13 +246,13 @@
       "name": "禾来过共享计数",
       "kind": "button",
       "refersTo": "visit-counter-button",
-      "description": "各项目分别累计所有访客点击次数，每次点击提交服务端加 1；示例 0 为外观预览。",
+      "description": "按项目累计有效记录，同一浏览器每个北京时间日期最多保留一条；提交锁定、2秒冷却、10秒撤销及服务端限流。Turnstile当前暂不启用，日后可选开启。总数以服务端为准；示例0仅为外观预览。",
       "html": "<button class=\"ds-primary ds-visit\" type=\"button\" aria-label=\"禾来过，累计 0 次\"><span>禾来过</span><span class=\"ds-count\">0</span></button>",
       "css": ".ds-primary{font-family:Inter, \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans SC\", sans-serif;min-height:42px;border:0;border-radius:999px;padding:0 16px;font-weight:700;color:#fffaf0;background:linear-gradient(135deg,rgba(106,154,69,.9),rgba(63,127,53,.84));box-shadow:inset 0 0 0 1px rgba(255,255,255,.28),inset 0 1px 0 rgba(255,255,255,.35),0 8px 20px rgba(63,127,53,.18);backdrop-filter:blur(16px);transition:transform 160ms ease}.ds-primary:hover{transform:translateY(-1px)}.ds-primary:focus-visible{outline:2px solid oklch(43% 0.075 140);outline-offset:4px;}.ds-visit{display:inline-flex;align-items:center;gap:8px;min-height:38px}.ds-count{font-variant-numeric:tabular-nums}"
     }
   ],
   "narrative": {
-    "overview": "本文件记录截至 **2026-11-12** 已确认的界面决定，供后续修改对照。墨脱农业项目形成的内容结构、卡片和人物展示标准，现适用于所有项目；各项目具体文字以最新分表维护表为准。\n\n整体以地形地图为主体，延续自然绿色、米白纸面、棕色文字和半透明磨砂浮层。地图浏览、项目概览、完整资料形成三个阅读层次。卡片按内容自适应高度，减少空余和重复说明。\n\n**界面重点：**\n\n- 地图铺满视口，分类固定在页面最底部。\n- 点位植物按打开页面时的月份切换，保持可见、可点击。\n- 项目概览先提供概况与参与方式，完整资料在右侧展开。\n- 公开页面展示项目内容；维护字段和编辑提示不作为正文展示。\n\n数据维护文件为 `outputs/heji-maintenance-20261031/禾伙人助农公益地图_分表维护版_v1.xlsx`。界面规则与表格内容分开维护：文字、人物编号、参与条目更新后通过导入同步，不能只改某张页面中的副本。",
+    "overview": "本文件记录截至 **2026-11-13** 已确认的界面决定，供后续修改对照。墨脱农业项目形成的内容结构、卡片和人物展示标准，现适用于所有项目；各项目具体文字以最新分表维护表为准。\n\n发布约束：默认只在本地修改，只有用户明确要求“推送 Git”时才推送。Cloudflare 正式更新沿用用户配置的 Git 自动发布流程。\n\n整体以地形地图为主体，延续自然绿色、米白纸面、棕色文字和半透明磨砂浮层。地图浏览、项目概览、完整资料形成三个阅读层次。卡片按内容自适应高度，减少空余和重复说明。\n\n**界面重点：**\n\n- 地图铺满视口，分类固定在页面最底部。\n- 点位植物按打开页面时的月份切换，保持可见、可点击。\n- 项目概览先提供概况与参与方式，完整资料在右侧展开。\n- 公开页面展示项目内容；维护字段和编辑提示不作为正文展示。\n\n数据维护文件为 `outputs/heji-maintenance-20261031/禾伙人助农公益地图_分表维护版_v1.xlsx`。界面规则与表格内容分开维护：文字、人物编号、参与条目更新后通过导入同步，不能只改某张页面中的副本。",
     "keyCharacteristics": [
       "地图铺满视口，分类固定在页面最底部。",
       "点位植物按打开页面时的月份切换，保持可见、可点击。",

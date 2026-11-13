@@ -1278,3 +1278,59 @@ button {
     font-size: 13px;
   }
 }
+
+.project-visit-counter {
+  display: flex;
+  max-width: 190px;
+  min-width: 0;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.visit-counter-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.visit-counter-button:disabled {
+  cursor: default;
+  opacity: 0.7;
+  transform: none;
+}
+
+.visit-undo {
+  border: 0;
+  padding: 3px 0;
+  color: var(--motuo-green);
+  background: transparent;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.visit-undo:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+
+.visit-counter-message {
+  color: var(--motuo-muted);
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.5;
+  text-align: right;
+}
+
+.visit-counter-message:empty {
+  display: none;
+}
+
+.visit-verification {
+  width: 150px;
+  min-height: 140px;
+}
+
+.story-card-footer:has(.visit-verification) {
+  gap: 8px;
+}

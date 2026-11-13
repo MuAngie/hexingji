@@ -2,6 +2,7 @@
   "name": "hexingji",
   "main": "worker/index.js",
   "compatibility_date": "2026-10-24",
+  "keep_vars": true,
   "assets": {
     "directory": "./out",
     "binding": "ASSETS",

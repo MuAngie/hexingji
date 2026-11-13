@@ -1,0 +1,7 @@
+# Set a fresh random cookie secret (32+ characters) before starting Wrangler.
+VISIT_COOKIE_SECRET=""
+
+# Turnstile is optional. Leave both unset to use rate limits without verification.
+# Local testing ONLY: uncomment both lines to test Turnstile with official dummy keys.
+# TURNSTILE_SITE_KEY="1x00000000000000000000AA"
+# TURNSTILE_SECRET_KEY="1x0000000000000000000000000000000AA"
